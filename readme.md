@@ -7,7 +7,7 @@ Le dossier images contiendra les nudes.
 Requirements
 ----
 
-*Python
-*Pillow 
+*Python    
+*Pillow      
 *Nude.py (easy_install -ZU nudepy)
 
