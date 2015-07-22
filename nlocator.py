@@ -58,7 +58,7 @@ while True:
           
         else:
           print bcolors.OKBLUE + "Nude Found" + bcolors.ENDC
-          fh = open('/Users/julienmalka/Desktop/lol.txt', 'a')
+          fh = open('pathtoyourfile/liste.txt', 'a')
           fh.write(input+"\n")
           fh.close()
   
