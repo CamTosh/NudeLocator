@@ -1,4 +1,13 @@
-Ce script liste les nudes uploadés sur Uplimg.
+Ces scripts listent les nudes uploadés sur Uplimg ou ScreenCloud
 Script de prévention parce que tout le monde laisse trainer pleins de choses qu'ils préféreraient qu'elles restent secrètes sur le net.
 L'API n'est pas très fiable.
-Editez la ligne 61 en mettant le chemin tu fichier qui contiendra la liste des images en absolu.
+Editez les ligne avec les chemins des fichiers.
+Le dossier images contiendra les nudes.
+
+Requirements
+----
+
+*Python
+*Pillow 
+*Nude.py (easy_install -ZU nudepy)
+

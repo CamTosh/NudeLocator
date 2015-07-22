@@ -2,9 +2,12 @@ from math import *
 from random import *
 import urllib2, json
 import re
-from os.path import abspath,expanduser
 import os  
 import time
+import urllib
+import nude
+from nude import Nude
+from PIL import Image
 
 class bcolors:
     HEADER = '\033[95m'
@@ -27,7 +30,7 @@ tableau = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
 compteur=0
 while True:
     tag = str(choice(tableau)) + str(choice(tableau)) + str(choice(tableau))
-
+    mdr = str(choice(tableau)) + str(choice(tableau)) + str(choice(tableau)) + str(choice(tableau))
 
     input = "http://uplmg.com/"+tag
     print bcolors.HEADER + input + " Essai numero "+str(compteur) + bcolors.ENDC
@@ -35,38 +38,36 @@ while True:
         response = urllib2.urlopen(input)
 
         html = response.read()
+     
         m = re.search("<img.+?src=[\"'](.+?)[\"'].*?>",html)
         if m is not None:
            lol= m.group(0)
-
+      
 
         m = re.search("/(.+?)g",lol)
         if m is not None:
           lol2= m.group(0)
-
+         
 
         input = "http://uplmg.com"+lol2 
-        request = urllib2.Request('https://api.algorithmia.com/v1/algo/sfw/NudityDetection/0.1.69')
-        request.add_header('Content-Type', 'application/json')
-        request.add_header('Authorization', 'Simple simpC5LBCivxfwEwCiIIQlSAy3m1')
-        response = urllib2.urlopen(request, json.dumps(input))
-        lol10 =response.read()
-
-        if "Not" in lol10:
+        urllib.urlretrieve(input, "/Users/julienmalka/Desktop/UplmgNudeLocator/images/"+mdr+".jpg")
+        n = Nude('/Users/julienmalka/Desktop/UplmgNudeLocator/images/'+mdr+".jpg")
+        n.parse()
+        
+        
+        if n.result==False:
           print bcolors.OKGREEN + "No nude on this one" + bcolors.ENDC
-          
+          os.remove("/Users/julienmalka/Desktop/UplmgNudeLocator/images/"+mdr+".jpg")
+
+
           
         else:
           print bcolors.OKBLUE + "Nude Found" + bcolors.ENDC
-          fh = open('pathtoyourfile/liste.txt', 'a')
-          fh.write(input+"\n")
-          fh.close()
+          
   
 
     except urllib2.HTTPError, e:
        print bcolors.FAIL + "URL est une 404" + bcolors.ENDC
     
     compteur= compteur +1
-    time.sleep(1)
-   
-   
+ 
